@@ -12,13 +12,12 @@
         <q-btn class="btnPlay" :icon="playPause" @click="open('bottom')" />
        </div>
         <div class="col-8">
-          <div class="text-weight-bold">{{ titleEpisode }}</div>
+          <div class="text-subtitle2">{{ titleEpisode }}</div>
           <div class="text-grey"><q-icon name="fas fa-calendar"/> {{ datePubEpisode }}</div>
           <div class="text-grey">{{ secForMin(time) }} / {{ secForMin(duration) }}</div>
-          <div class="text-grey">
-            <q-icon name="volume_up" class="iconVol" @click="sliderVol = true"/>
-            <q-icon name="share" class="iconVol"/>
-          </div>
+        </div>
+     </div>
+        <div class="progressBar">
           <q-slider
             v-model="time"
             :min="0"
@@ -26,11 +25,13 @@
             :step="0.1"
             @change="progressAudio(time)"
             color="green"
-            style="width:80%"
+            style="width:95%"
           />
+          <div class="text-grey">
+            <q-icon name="volume_up" class="iconVol" @click="sliderVol = true"/>
+            <q-icon name="share" class="iconVol"/>
+          </div>
         </div>
-     </div>
-
    </div>
    <div class="q-ma-md">
    </div>
@@ -262,13 +263,16 @@ margin-top: 1.5%;
   background-size: 300px 100px;
   color: #f2f2f2;
   font-size: 20pt;
-  width: 100px;
-  height: 100px;
+  width: 80x;
+  height: 80px;
 }
 .lstAudios {
   width: 100%;
 }
 .iconVol {
-  font-size: 25px;
+  font-size: 15px;
+}
+.progressBar {
+  margin-left: 15px;
 }
 </style>

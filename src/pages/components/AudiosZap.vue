@@ -29,7 +29,7 @@
                   </q-btn>
                   </div>
                   <div class="q-ma-md">
-                    <span class="text-subtitle2 timer">00:00 / 05:00</span>
+                    <span class="text-grey timer">00:00 / 05:00</span>
                   </div>
                 <div class="q-ma-sm">
                   <q-slider
