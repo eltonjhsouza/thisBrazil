@@ -19,57 +19,26 @@
             <q-icon name="volume_up" class="iconVol" @click="sliderVol = true"/>
             <q-icon name="share" class="iconVol"/>
           </div>
-          <!-- <q-btn label="Volume" color="primary" @click="sliderVol = true" /> -->
+          <q-slider
+            v-model="time"
+            :min="0"
+            :max="parseInt(duration)"
+            :step="0.1"
+            @change="progressAudio(time)"
+            color="green"
+            style="width:80%"
+          />
         </div>
      </div>
-    <q-linear-progress :value="(secForMin(time))/100" color="pink" />
+
    </div>
-   <div class="q-pa-md">
-    <!-- <q-item>
-        <q-item-section side>
-          <q-icon color="teal" name="volume_down" />
-        </q-item-section>
-        <q-item-section>
-          <q-slider
-            v-model="volume"
-            :min="0"
-            :max="10"
-            label
-            color="teal"
-          />
-        </q-item-section>
-        <q-item-section side>
-          <q-icon color="teal" name="volume_up" />
-        </q-item-section>
-      </q-item> -->
+   <div class="q-ma-md">
    </div>
 
-  <div class="audios">
-    <span>Audios do zap</span>
-  </div>
-
-    <AudiosZap />
-    <!-- <q-btn color="primary" label="Get Picture" @click="captureImage" />
-
-    <img :src="imageSrc"> -->
-    <!-- <q-dialog v-model="dialog" :position="position">
-      <q-card style="width: 350px">
-        <q-linear-progress :value="0.6" color="pink" />
-
-        <q-card-section class="row items-center no-wrap">
-          <div>
-            <div class="text-weight-bold">The Walker</div>
-            <div class="text-grey">Fitz & The Tantrums</div>
-          </div>
-
-          <q-space />
-
-          <q-btn flat round icon="fast_rewind" />
-          <q-btn flat round icon="pause" @click="play()" />
-          <q-btn flat round icon="fast_forward" />
-        </q-card-section>
-      </q-card>
-    </q-dialog> -->
+    <div class="audios">
+      <span>Audios do zap</span>
+    </div>
+      <AudiosZap />
     <q-dialog v-model="sliderVol">
       <q-card style="width: 300px" class="q-px-sm q-pb-md">
         <q-card-section>
@@ -203,6 +172,11 @@ export default {
         console.log(audio.currentTime)
         // this.sources.currentTime = audio.currentTime
       }
+    },
+    progressAudio (time) {
+      const audio = document.getElementById('audioTag')
+      audio.currentTime = time
+      console.log(audio.currentTime)
     },
     volume () {
       const audio = document.getElementById('audioTag')
