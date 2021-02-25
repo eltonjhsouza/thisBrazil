@@ -83,8 +83,11 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-
     <q-footer elevated >
+    <q-dialog class="playerDialog1" seamless position="bottom">
+
+    </q-dialog>
+    <PlayerBottom v-show="playerDialog" :audio="playAudio" />
       <q-toolbar>
         <q-toolbar-title>
           <q-tabs
@@ -103,6 +106,7 @@
 </template>
 
 <script>
+import PlayerBottom from 'src/pages/components/Player-Bottom'
 import {
   QTabs,
   QTab
@@ -112,10 +116,13 @@ export default {
   name: 'MainLayout',
   components: {
     QTabs,
-    QTab
+    QTab,
+    PlayerBottom
   },
   data () {
     return {
+      playAudio: {},
+      playerDialog: false,
       tab: 'mails',
       leftDrawerOpen: false
     }
@@ -125,11 +132,27 @@ export default {
       this.$router.push({ name: 'episodes' })
       // console.log('home')
     }
+  },
+  created () {
+    this.$root.$on('playAudio', (currentAudio) => {
+      this.playerDialog = true
+      console.log('recebi o audio e abri o player')
+      this.playAudio = {
+        src: currentAudio.audio.src,
+        currentTime: currentAudio.currentTime
+      }
+      this.$root.$emit('play')
+      console.log(this.playAudio)
+    })
+    this.$root.$on('playAudio', (val) => {
+      this.playerDialog = true
+    })
   }
 }
 </script>
 <style scoped>
 .toolbar-class {
-  width: 100%;
+
 }
+
 </style>

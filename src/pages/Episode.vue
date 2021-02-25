@@ -25,11 +25,13 @@
             :step="0.1"
             @change="progressAudio(time)"
             color="green"
+            label
             style="width:95%"
           />
           <div class="text-grey">
             <q-icon name="volume_up" class="iconVol" @click="sliderVol = true"/>
             <q-icon name="share" class="iconVol"/>
+            <q-icon name="volume_up" class="iconVol" @click="openPlay()"/>
           </div>
         </div>
    </div>
@@ -110,7 +112,6 @@ export default {
     },
     play () {
       const audio = document.getElementById('audioTag')
-
       if (audio.paused) {
         console.log('play')
         audio.play()
@@ -123,6 +124,11 @@ export default {
               this.sources.currentTime = audio.currentTime
               // console.log(this.sources.currentTime)
               this.time = this.sources.currentTime
+              const currentAudio = {
+                audio: audio,
+                currentTime: this.time
+              }
+              this.$root.$emit('playAudio', currentAudio)
             },
             false
           )

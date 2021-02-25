@@ -53,7 +53,7 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import { QCard, QIcon } from 'quasar'
 
 export default {
@@ -94,9 +94,9 @@ export default {
   },
   created () {
     this.getAudios()
-    axios.get('https://audiodozap.com.br/page-data/index/page-data.json').then(response => {
-      console.log(response)
-    })
+    // axios.get('https://audiodozap.com.br/page-data/index/page-data.json').then(response => {
+    //   console.log(response)
+    // })
   }
 }
 </script>
