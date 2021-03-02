@@ -2,14 +2,15 @@
 <div class="q-pa-md">
    <div class="player">
     <div class="row q-mt-md">
-    <audio
+    <!-- <audio
       id="audioTag"
       preload="none"
       ref="audioFile"
       :src="audiomp3"
-      />
+      muted="true"
+      /> -->
        <div class="col-4 playerBtn">
-        <q-btn class="btnPlay" :icon="playPause" @click="open('bottom')" />
+        <q-btn class="btnPlay" :icon="playPause" @click="play()" />
        </div>
         <div class="col-8">
           <div class="text-subtitle2">{{ titleEpisode }}</div>
@@ -112,7 +113,8 @@ export default {
       this.play()
     },
     play () {
-      const audio = document.getElementById('audioTag')
+      // const audio = document.getElementById('audioTag')
+      const audio = this.audiomp3
       const data = {
         audio: audio,
         title: this.titleEpisode,

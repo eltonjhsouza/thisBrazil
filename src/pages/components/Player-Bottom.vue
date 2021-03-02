@@ -1,7 +1,6 @@
 <template>
     <div class="playerDialog row">
       <div class="primeira col-3" :style="{'background-image': 'url('+bgImage+')'}">
-        <span>teste</span>
       </div>
       <div class="segunda col-6">
           <div class="text-grey col">
@@ -78,14 +77,32 @@ export default {
     }
   },
   methods: {
-    play (currentAudio) {
-      this.audiomp3 = currentAudio
+    play () {
+      console.log('Somente play')
+      // this.audiomp3 = currentAudio
       const audio = document.getElementById('audioTag')
+      // if (audio.pause()) {
+      //   this.playPause = 'fas fa-pause-circle'
+      //   var playPromise = audio.play()
+      // } else {
+      //   console.log('pause')
+      //   this.playPause = 'fas fa-play-circle'
+      //   audio.pause()
+      // }
+      // // In browsers that don’t yet support this functionality,
+      // // playPromise won’t be defined.
+      // if (playPromise !== undefined) {
+      //   playPromise.then(function () {
+      //     audio.play()
+      //   }).catch(function (error) {
+      //     console.log(error + 'DEU ERRRO MERIMAO')
+      //   })
+      // }
       if (audio.paused) {
         console.log('play')
         try {
           audio.play()
-          this.isPlaying = true
+          this.isPlaying = false
           this.playPause = 'fas fa-pause-circle'
           audio.addEventListener('canplaythrough', () => {
             audio.addEventListener(
@@ -99,7 +116,7 @@ export default {
             )
           })
           localStorage.audio = audio.src
-          localStorage.playing = true
+          localStorage.playing = false
 
           audio.addEventListener('error', (error) => {
             console.log(error)
@@ -119,6 +136,7 @@ export default {
             audio.play()
           })
         } catch (error) {
+          console.log('error')
           console.log(error)
         }
       } else {
@@ -128,53 +146,55 @@ export default {
       }
     },
     keepPlaying (currentAudio) {
-      this.audiomp3 = currentAudio
-      const audio = document.getElementById('audioTag')
-      if (audio.paused) {
-        console.log('play')
-        try {
-          audio.play()
-          this.isPlaying = true
-          this.playPause = 'fas fa-pause-circle'
-          audio.addEventListener('canplaythrough', () => {
-            audio.addEventListener(
-              'timeupdate',
-              () => {
-                this.time = audio.currentTime
-                localStorage.currentTime = this.time
-                console.log(this.time)
-              },
-              false
-            )
-          })
-          localStorage.audio = audio.src
-          localStorage.playing = true
+      // this.audiomp3 = currentAudio
+      // const audio = document.getElementById('audioTag')
+      // audio.pause()
+      // if (audio.paused) {
+      //   console.log('play')
+      //   try {
+      //     audio.play()
+      //     this.isPlaying = true
+      //     this.playPause = 'fas fa-pause-circle'
+      //     audio.addEventListener('canplaythrough', () => {
+      //       audio.addEventListener(
+      //         'timeupdate',
+      //         () => {
+      //           this.time = audio.currentTime
+      //           localStorage.currentTime = this.time
+      //           console.log(this.time)
+      //         },
+      //         false
+      //       )
+      //     })
+      //     localStorage.audio = audio.src
+      //     localStorage.playing = true
 
-          audio.addEventListener('error', (error) => {
-            console.log(error)
-            // self.loadingFiles = false
-            const exception = error.message || error
-            console.log(exception)
-          })
+      //     audio.addEventListener('error', (error) => {
+      //       console.log(error)
+      //       // self.loadingFiles = false
+      //       const exception = error.message || error
+      //       console.log(exception)
+      //     })
 
-          audio.addEventListener('ended', () => {
-            console.log('ended')
-            // console.log(self.repeat_audio)
-            // if (self.repeat_audio) {
+      //     audio.addEventListener('ended', () => {
+      //       console.log('ended')
+      //       // console.log(self.repeat_audio)
+      //       // if (self.repeat_audio) {
 
-            // }
-            this.selectedMediaFile.currentTime = 0
-            audio.currentTime = 0
-            audio.play()
-          })
-        } catch (error) {
-          console.log(error)
-        }
-      } else {
-        console.log('pause')
-        this.playPause = 'fas fa-play-circle'
-        audio.pause()
-      }
+      //       // }
+      //       this.selectedMediaFile.currentTime = 0
+      //       audio.currentTime = 0
+      //       audio.play()
+      //     })
+      //   } catch (error) {
+      //     console.log(error)
+      //   }
+      // } else {
+      //   console.log('pause')
+      //   this.playPause = 'fas fa-play-circle'
+      //   audio.pause()
+      //   localStorage.playing = false
+      // }
     }
   },
   created () {
@@ -182,7 +202,8 @@ export default {
       this.title = data.title
       this.duration = data.duration
       this.bgImage = data.img
-      this.play(currentAudio.src)
+      this.audiomp3 = data.audio
+      this.play()
     })
     this.$root.$on('keepPlay', (cAudio) => {
       this.audiomp3 = cAudio

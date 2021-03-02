@@ -138,28 +138,23 @@ export default {
     this.$root.$on('playAudio', (currentAudio, data) => {
       this.playerDialog = true
       console.log('recebi o audio e abri o player')
-      // console.log(data)
-      // this.playAudio = {
-      //   src: currentAudio.audio.src,
-      //   currentTime: currentAudio.currentTime
-      // }
       this.$root.$emit('play', currentAudio, data)
     })
   },
   mounted () {
     console.log(this.$route.path)
-    if (this.$route.path !== '/episode') {
-      console.log('Diferente')
-      if (localStorage.getItem('playing')) {
-        console.log('Is Playing')
-        // console.log(localStorage.getItem('currentTime'))
-        // const cAudio = {
-        //   src: localStorage.getItem('audio'),
-        //   curTime: localStorage.getItem('currentTime')
-        // }
-        this.$root.$emit('keepPlay', localStorage.getItem('audio'))
-      }
-    }
+    // if (this.$route.path !== '/episode') {
+    //   console.log('Diferente')
+    //   if (localStorage.getItem('playing')) {
+    //     console.log('Is Playing')
+    //     // console.log(localStorage.getItem('currentTime'))
+    //     // const cAudio = {
+    //     //   src: localStorage.getItem('audio'),
+    //     //   curTime: localStorage.getItem('currentTime')
+    //     // }
+    //     this.$root.$emit('keepPlay', localStorage.getItem('audio'))
+    //   }
+    // }
   }
 }
 </script>
