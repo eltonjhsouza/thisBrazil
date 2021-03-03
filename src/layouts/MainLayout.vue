@@ -2,14 +2,16 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn flat @click="$router.go(-1)" round dense icon="fas fa-arrow-left" />
+        <div class="backArrow">
+        <q-btn v-show="this.$route.path !== '/' && this.$route.path !== '/episodes'" flat @click="$router.go(-1)" round dense icon="fas fa-arrow-left" />
+        </div>
         <div class="toolbar-class">
         <q-toolbar-title >
           This Brazil
         </q-toolbar-title>
         </div>
 
-        <div>
+        <div class="search">
         <q-input dark borderless class="q-ml-sm">
           <template v-slot:append>
             <q-icon  name="search" />
@@ -161,6 +163,12 @@ export default {
 <style scoped>
 .toolbar-class {
 
+}
+.search {
+  margin-right: 0px;
+}
+.backArrow {
+  width: 15%;
 }
 
 </style>

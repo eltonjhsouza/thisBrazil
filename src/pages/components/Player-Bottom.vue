@@ -4,12 +4,12 @@
       </div>
       <div class="segunda col-6">
           <div class="text-grey col">
-                <span class="animated" style="margin-top: 20px">
+                <b><span class="animated" style="margin-top: 20px; color: #ffffff">
                     {{ title }}
-                </span>
-              <div class="q-ma-sm" style="margin-bottom: 0px">
+                </span></b>
+              <div class="q-ma-sm" style="margin-bottom: 0px; color: #ffffff">
                 <span  >
-                    {{ duration }}
+                    Duração : {{ secForMin(duration) }}
                 </span>
               </div>
             </div>
@@ -145,6 +145,11 @@ export default {
         audio.pause()
       }
     },
+    secForMin (val) {
+      const sec = val
+      const min = sec / 60
+      return min.toFixed(2)
+    },
     keepPlaying (currentAudio) {
       // this.audiomp3 = currentAudio
       // const audio = document.getElementById('audioTag')
@@ -242,7 +247,7 @@ export default {
   to {right: 200px;}
 }
 .playerDialog {
-  background-color: black;
+  background-color: #f54d35;
   height: 70px;
   display: flex;
 }
@@ -274,12 +279,13 @@ export default {
   z-index: 4;
 }
 .segunda {
-  background-color: rgb(255, 255, 255);
+  background-color: #001864;
+  color: #ffffff;
   width: 55%;
   height: 100%;
 }
 .terceira {
-  background-color: rgb(109, 5, 5);
+  background-color: #020b2b;
   width: 25%;
   height: 100%;
   z-index: 4;
@@ -287,7 +293,7 @@ export default {
 .playbtn {
   display: flex;
   margin: 5px;
-  font-size: 300%;
+  font-size:200%;
   align-items: center;
 }
 .sharebtn {

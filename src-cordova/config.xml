@@ -2,7 +2,7 @@
 <widget id="br.com.paraisodascores" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>This Brazil</name>
     <description>App com audios do This is Brazil</description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
+    <author email="eltonjhsouza@gmail.com" href="http://cordova.io">
         Apache Cordova Team
     </author>
     <content src="index.html" />

@@ -14,30 +14,9 @@
         height="300px"
         class="bg-primary text-white shadow-1 rounded-borders"
       >
-        <q-carousel-slide name="style" class="column no-wrap flex-center">
-          <q-icon name="style" size="56px" />
-          <div class="q-mt-md text-center">
-            {{ lorem }}
-          </div>
-        </q-carousel-slide>
-        <q-carousel-slide name="tv" class="column no-wrap flex-center">
-          <q-icon name="live_tv" size="56px" />
-          <div class="q-mt-md text-center">
-            {{ lorem }}
-          </div>
-        </q-carousel-slide>
-        <q-carousel-slide name="layers" class="column no-wrap flex-center">
-          <q-icon name="layers" size="56px" />
-          <div class="q-mt-md text-center">
-            {{ lorem }}
-          </div>
-        </q-carousel-slide>
-        <q-carousel-slide name="map" class="column no-wrap flex-center">
-          <q-icon name="terrain" size="56px" />
-          <div class="q-mt-md text-center">
-            {{ lorem }}
-          </div>
-        </q-carousel-slide>
+      <q-carousel-slide :name="1" img-src="https://instagram.fipn1-1.fna.fbcdn.net/v/t51.2885-15/e35/s240x240/132626120_714685822804443_9134868571206822954_n.jpg?tp=1&_nc_ht=instagram.fipn1-1.fna.fbcdn.net&_nc_cat=103&_nc_ohc=nsoYsCPDGHsAX-dLwFa&oh=b72817f4806101cc6eac286ab33b090f&oe=60412658" />
+      <q-carousel-slide :name="2" img-src="https://instagram.fipn1-1.fna.fbcdn.net/v/t51.2885-15/e35/c0.75.600.600a/s240x240/131979743_1282087302157645_6890020100053201845_n.jpg?tp=1&_nc_ht=instagram.fipn1-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=EAVvL3Q064YAX9Om_yy&oh=e63f3faa2f1ef34944165eed7284b1d6&oe=6067BBF2" />
+      <q-carousel-slide :name="3" img-src="https://instagram.fipn1-1.fna.fbcdn.net/v/t51.2885-15/e35/s240x240/131976625_851130825698055_7865069031702685689_n.jpg?tp=1&_nc_ht=instagram.fipn1-1.fna.fbcdn.net&_nc_cat=103&_nc_ohc=jp6r83lFRuAAX-sP7iA&oh=080ce1b32f8241c623723c9877676b00&oe=60677E6C" />
       </q-carousel>
     </div>
     <!-- <div v-for="item in lstEpsodes" class="episodes" :key="item.img">
@@ -116,8 +95,8 @@ export default {
       lstEpsodes: {},
       lEpsodes: [],
       episode: [],
-      slide: 'style',
-      lorem: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque voluptatem totam, architecto cupiditate officia rerum, error dignissimos praesentium libero ab nemo.'
+      slide: 3,
+      lorem: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque voluptatem totam, architecto cupiditate officia rerum, error digneessimos praesentium libero ab nemo.'
     }
   },
   methods: {
