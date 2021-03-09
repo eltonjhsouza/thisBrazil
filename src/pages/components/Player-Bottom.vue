@@ -1,5 +1,11 @@
 <template>
     <div class="playerDialog row">
+      <q-linear-progress
+      v-model="time"
+      :min="0"
+      :max="parseInt(duration)"
+      :value="0.1"
+      color="pink" />
       <div class="primeira col-3" :style="{'background-image': 'url('+bgImage+')'}">
       </div>
       <div class="segunda col-6">

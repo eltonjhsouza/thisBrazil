@@ -97,9 +97,9 @@
             dense
             align="justify"
           >
-            <q-tab class="text-white" name="mails" icon="library_music" label="Epsódios" @click="goToEpsodes"/>
-            <q-tab class="text-white" name="alarms" icon="fas fa-plus-circle" label="Mais Apps" />
-            <q-tab class="text-white" name="movies" icon="fas fa-question-circle" label="Sobre" />
+            <q-tab class="text-white" name="epsode" icon="library_music" no-caps :label="lblName1" @click="goToEpsodes"/>
+            <q-tab class="text-white" name="apps" icon="fas fa-plus-circle" :label="lblName2" />
+            <q-tab class="text-white" name="about" icon="fas fa-question-circle" :label="lblName3" />
           </q-tabs>
         </q-toolbar-title>
       </q-toolbar>
@@ -124,6 +124,9 @@ export default {
   data () {
     return {
       playAudio: {},
+      lblName1: '',
+      lblName2: '',
+      lblName3: '',
       playerDialog: false,
       tab: 'mails',
       leftDrawerOpen: false
@@ -132,7 +135,7 @@ export default {
   methods: {
     goToEpsodes () {
       this.$router.push({ name: 'episodes' })
-      // console.log('home')
+      console.log(this.tab)
     }
   },
   created () {
@@ -145,6 +148,7 @@ export default {
   },
   mounted () {
     console.log(this.$route.path)
+    this.lblName1 = 'Episódios'
     // if (this.$route.path !== '/episode') {
     //   console.log('Diferente')
     //   if (localStorage.getItem('playing')) {

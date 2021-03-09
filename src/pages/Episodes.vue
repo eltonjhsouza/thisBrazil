@@ -12,7 +12,7 @@
         padding
         arrows
         height="300px"
-        class="bg-primary text-white shadow-1 rounded-borders"
+        class="text-white shadow-1 rounded-borders"
       >
       <q-carousel-slide :name="1" img-src="https://instagram.fipn1-1.fna.fbcdn.net/v/t51.2885-15/e35/s240x240/132626120_714685822804443_9134868571206822954_n.jpg?tp=1&_nc_ht=instagram.fipn1-1.fna.fbcdn.net&_nc_cat=103&_nc_ohc=nsoYsCPDGHsAX-dLwFa&oh=b72817f4806101cc6eac286ab33b090f&oe=60412658" />
       <q-carousel-slide :name="2" img-src="https://instagram.fipn1-1.fna.fbcdn.net/v/t51.2885-15/e35/c0.75.600.600a/s240x240/131979743_1282087302157645_6890020100053201845_n.jpg?tp=1&_nc_ht=instagram.fipn1-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=EAVvL3Q064YAX9Om_yy&oh=e63f3faa2f1ef34944165eed7284b1d6&oe=6067BBF2" />
@@ -112,6 +112,7 @@ export default {
       self.lstEpsodes = this.lstEpsodes
       // const self = this
       axios.get('https://anchor.fm/s/1969eccc/podcast/rss').then(response => {
+        console.log(response.status)
         this.xmlContent = response.data
         var convert = require('xml-js')
         var result1 = convert.xml2json(this.xmlContent, { compact: true, spaces: 4 })
