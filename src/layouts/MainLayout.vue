@@ -2,14 +2,16 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn flat @click="$router.go(-1)" round dense icon="fas fa-arrow-left" />
+        <div class="backArrow">
+        <q-btn v-show="this.$route.path !== '/' && this.$route.path !== '/episodes'" flat @click="$router.go(-1)" round dense icon="fas fa-arrow-left" />
+        </div>
         <div class="toolbar-class">
         <q-toolbar-title >
           This Brazil
         </q-toolbar-title>
         </div>
 
-        <div>
+        <div class="search">
         <q-input dark borderless class="q-ml-sm">
           <template v-slot:append>
             <q-icon  name="search" />
@@ -83,8 +85,11 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-
     <q-footer elevated >
+    <q-dialog class="playerDialog1" seamless position="bottom">
+
+    </q-dialog>
+    <PlayerBottom v-show="playerDialog" :audio="playAudio" />
       <q-toolbar>
         <q-toolbar-title>
           <q-tabs
@@ -92,9 +97,9 @@
             dense
             align="justify"
           >
-            <q-tab class="text-white" name="mails" icon="library_music" label="Epsódios" @click="goToEpsodes"/>
-            <q-tab class="text-white" name="alarms" icon="fas fa-plus-circle" label="Mais Apps" />
-            <q-tab class="text-white" name="movies" icon="fas fa-question-circle" label="Sobre" />
+            <q-tab class="text-white" name="epsode" icon="library_music" no-caps :label="lblName1" @click="goToEpsodes"/>
+            <q-tab class="text-white" name="apps" icon="fas fa-plus-circle" :label="lblName2" />
+            <q-tab class="text-white" name="about" icon="fas fa-question-circle" :label="lblName3" />
           </q-tabs>
         </q-toolbar-title>
       </q-toolbar>
@@ -103,6 +108,7 @@
 </template>
 
 <script>
+import PlayerBottom from 'src/pages/components/Player-Bottom'
 import {
   QTabs,
   QTab
@@ -112,10 +118,16 @@ export default {
   name: 'MainLayout',
   components: {
     QTabs,
-    QTab
+    QTab,
+    PlayerBottom
   },
   data () {
     return {
+      playAudio: {},
+      lblName1: '',
+      lblName2: '',
+      lblName3: '',
+      playerDialog: false,
       tab: 'mails',
       leftDrawerOpen: false
     }
@@ -123,13 +135,44 @@ export default {
   methods: {
     goToEpsodes () {
       this.$router.push({ name: 'episodes' })
-      // console.log('home')
+      console.log(this.tab)
     }
+  },
+  created () {
+    console.log(this.$route.path)
+    this.$root.$on('playAudio', (currentAudio, data) => {
+      this.playerDialog = true
+      console.log('recebi o audio e abri o player')
+      this.$root.$emit('play', currentAudio, data)
+    })
+  },
+  mounted () {
+    console.log(this.$route.path)
+    this.lblName1 = 'Episódios'
+    // if (this.$route.path !== '/episode') {
+    //   console.log('Diferente')
+    //   if (localStorage.getItem('playing')) {
+    //     console.log('Is Playing')
+    //     // console.log(localStorage.getItem('currentTime'))
+    //     // const cAudio = {
+    //     //   src: localStorage.getItem('audio'),
+    //     //   curTime: localStorage.getItem('currentTime')
+    //     // }
+    //     this.$root.$emit('keepPlay', localStorage.getItem('audio'))
+    //   }
+    // }
   }
 }
 </script>
 <style scoped>
 .toolbar-class {
-  width: 100%;
+
 }
+.search {
+  margin-right: 0px;
+}
+.backArrow {
+  width: 15%;
+}
+
 </style>

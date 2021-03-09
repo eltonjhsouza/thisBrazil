@@ -2,14 +2,15 @@
 <div class="q-pa-md">
    <div class="player">
     <div class="row q-mt-md">
-    <audio
+    <!-- <audio
       id="audioTag"
       preload="none"
       ref="audioFile"
       :src="audiomp3"
-      />
+      muted="true"
+      /> -->
        <div class="col-4 playerBtn">
-        <q-btn class="btnPlay" :icon="playPause" @click="open('bottom')" />
+        <q-btn class="btnPlay" :icon="playPause" @click="play()" />
        </div>
         <div class="col-8">
           <div class="text-subtitle2">{{ titleEpisode }}</div>
@@ -25,11 +26,13 @@
             :step="0.1"
             @change="progressAudio(time)"
             color="green"
+            label
             style="width:95%"
           />
           <div class="text-grey">
             <q-icon name="volume_up" class="iconVol" @click="sliderVol = true"/>
             <q-icon name="share" class="iconVol"/>
+            <q-icon name="volume_up" class="iconVol" @click="openPlay()"/>
           </div>
         </div>
    </div>
@@ -75,6 +78,7 @@ export default {
   },
   data () {
     return {
+      img: '',
       seekslider: '',
       seeking: false,
       imageSrc: '',
@@ -109,47 +113,16 @@ export default {
       this.play()
     },
     play () {
-      const audio = document.getElementById('audioTag')
-
-      if (audio.paused) {
-        console.log('play')
-        audio.play()
-        this.isPlaying = true
-        this.playPause = 'fas fa-pause-circle'
-        audio.addEventListener('canplaythrough', () => {
-          audio.addEventListener(
-            'timeupdate',
-            () => {
-              this.sources.currentTime = audio.currentTime
-              // console.log(this.sources.currentTime)
-              this.time = this.sources.currentTime
-            },
-            false
-          )
-        })
-
-        audio.addEventListener('error', (error) => {
-          console.log(error)
-          // self.loadingFiles = false
-          const exception = error.message || error
-          console.log(exception)
-        })
-
-        audio.addEventListener('ended', () => {
-          console.log('ended')
-          // console.log(self.repeat_audio)
-          // if (self.repeat_audio) {
-
-          // }
-          this.selectedMediaFile.currentTime = 0
-          audio.currentTime = 0
-          audio.play()
-        })
-      } else {
-        console.log('pause')
-        this.playPause = 'fas fa-play-circle'
-        audio.pause()
+      // const audio = document.getElementById('audioTag')
+      const audio = this.audiomp3
+      const data = {
+        audio: audio,
+        title: this.titleEpisode,
+        duration: this.duration,
+        img: this.img
       }
+      console.log(data)
+      this.$root.$emit('playAudio', audio, data)
     },
     seekRange (event) {
       // TODO addEventListener está dando null, tem que ver o que ta pegando
@@ -215,7 +188,7 @@ export default {
       // size: this.$route.params.episode.enclosure._attributes.length,
       // description: this.$route.params.episode._description._cdata
       duration: this.$route.params.episode['itunes:duration']._text,
-      // img: this.$route.params.episode['itunes:image']._attributes.href,
+      img: this.$route.params.episode['itunes:image']._attributes.href,
       title: this.$route.params.episode.title._cdata,
       dataPub: this.$route.params.episode.pubDate._text
     }
@@ -223,12 +196,14 @@ export default {
     this.titleEpisode = objEpsisode.title
     this.datePubEpisode = objEpsisode.dataPub
     this.duration = objEpsisode.duration
+    this.img = objEpsisode.img
     this.datePubEpisode = date.formatDate(this.datePubEpisode, 'DD-MM-YY')
     console.log('OBJ')
     console.log(objEpsisode.url)
     console.log(objEpsisode.dataPub)
     console.log(objEpsisode.title)
     console.log(objEpsisode.duration)
+    console.log(objEpsisode.img)
     console.log(this.$route.params.episode)
   }
   // watch: {
